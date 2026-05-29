@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tab name -->
+    <title>User Details</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    table tbody tr:hover {
+        transform: scale(1.01);
+        transition: 0.2s ease-in-out;
+    }
+    </style>
+</head>
+
+<body class="bg-success-subtle">
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 ">
+
+        <!-- Header -->
+        <div class="card-header bg-secondary text-white px-4 py-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h2 class="mb-0">
+                    User Management System
+                </h2>
+
+                <!-- Add User Button -->
+                 
+                <a href="{{ route('form') }}" class="btn btn-warning fw-bold">
+                     + Add User
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body bg-primary-subtle">
+
+            <!-- Title -->
+            <div class="text-center mb-1">
+                <h4 class="text-primary display-10 border-bottom pb-1 d-inline-block">
+                    User Records
+                </h4>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+
+                 <table class="table table-hover align-middle text-center shadow-sm rounded overflow-hidden">
+
+                    <thead class="table-secondary">
+
+                        <tr class="text-dark">
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Gender</th>
+
+                         </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                         @forelse($users as $user)
+
+                        <tr class="{{ $loop->even ? 'table-primary' : 'table-info' }}">
+
+                            <td>
+                                <span class="badge bg-dark">
+                                    {{ $user->id }}
+                                </span>
+                            </td>
+
+                            <td class="fw-semibold text-primary">
+                                {{ $user->name }}
+                            </td>
+
+                            <td>
+                                {{ $user->age }}
+                            </td>
+
+                            <td class="text-muted">
+                                {{ $user->email }}
+                            </td>
+
+                            <td>
+                                <span class="badge bg-secondary">
+                                    {{ $user->city }}
+                                </span>
+                            </td>
+
+                            <td>
+                                 @if(strtolower($user->gender) == 'male')
+                                    <span class="badge bg-info px-4 py-2">
+                                        Male
+                                    </span>
+                                @else
+                                     <span class="badge bg-danger px-4 py-2">
+                                        Female
+                                    </span>
+                                @endif
+                            </td>
+
+                        </tr>
+
+                        @empty
+
+                        <tr>
+                            <td colspan="6" class="text-danger fw-bold py-4">
+                                No Records Found
+                            </td>
+                        </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="d-flex justify-content-between align-items-center mt-4">
+
+                <!-- Pagination -->
+                <div>
+                    {{ $users->links('pagination::bootstrap-5') }}
+                </div>
+
+                <!-- Total Records -->
+                <div class="text-black-subtle">
+                    Total Records: {{ $totalcount }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
