@@ -12,4 +12,10 @@ Route::view('/', 'upload')
 Route::post('/import', [UserDataController::class, 'import'])
     ->name('user.import');
 
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'dispaly']);
+
+Route::get('/delete/{id}', [UserController::class, 'delete']);
+
+Route::get('/edit/{id}', [UserController::class, 'edit']);
+
+Route::post('/update/{id}', [UserController::class, 'update']);

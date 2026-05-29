@@ -64,6 +64,7 @@
                             <th>Email</th>
                             <th>City</th>
                             <th>Gender</th>
+                            <th>Action</th>
 
                          </tr>
 
@@ -109,6 +110,16 @@
                                         Female
                                     </span>
                                 @endif
+                            </td>
+                            <td>
+                                <a href="{{ url('edit/'.$user->id) }}" class="btn btn-warning btn-sm me-2">
+                                    Edit
+                                </a>
+
+                                <a href="{{ url('delete/'.$user->id) }}" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure ? you want to delete this user?')">
+                                    Delete
+                                </a>
                             </td>
 
                         </tr>
