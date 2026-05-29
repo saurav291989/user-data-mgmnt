@@ -112,7 +112,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ url('edit/'.$user->id) }}" class="btn btn-warning btn-sm me-2">
+                                <a href="{{ url('edit/'.$user->id) }}" class="btn btn-warning btn-sm me-2"
+                                    target="_blank">
                                     Edit
                                 </a>
 

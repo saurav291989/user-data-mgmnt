@@ -8,14 +8,15 @@
 
 </head>
 
-<body class="bg-primary bg-gradient">
+<body class="bg-primary-subtle bg-gradient">
 
     <div class="container vh-100 d-flex justify-content-center align-items-center">
 
-        <div class="card shadow-lg p-4 rounded-4" style="width: 500px;">
+        <div class="card shadow-lg p-4 rounded-4"
+            style="width: 500px; background-color:rgb(145, 240, 193);">
 
             <div class="text-center mb-4">
-                <h2 class="text-info fw-bold">
+                <h2 class="text-warning-subtle fw-bold">
                     User Data Upload
                 </h2>
 
