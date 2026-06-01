@@ -32,7 +32,7 @@
 
                 <!-- Add User Button -->
                  
-                <a href="{{ route('form') }}" class="btn btn-warning fw-bold">
+                <a href="{{ route('form') }}" target='_blank' class="btn btn-warning fw-bold">
                      + Add User
                 </a>
 

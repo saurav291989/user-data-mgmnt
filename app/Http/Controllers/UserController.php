@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserData;
+
 
 class UserController extends Controller
 {
     public function dispaly()
     {
         $users = DB::table('user_data')
+                    ->whereNull('deleted_at')
                     ->orderBy('id', 'desc')
                     ->paginate(5);
-        $totalcount= DB::table('user_data') -> count();
+        $totalcount= DB::table('user_data') 
+                    ->whereNull('deleted_at')
+                    -> count();
 
         return view('users', compact('users','totalcount'));
     }
 
     public function delete($id)
     {
-        DB::table('user_data')
-            ->where('id', $id)
-            ->delete();
+        // DB::table('user_data')
+        //     ->where('id', $id)
+        //     ->delete();
+        UserData::find($id)->delete();
 
         return redirect('/users')
                 ->with('success', 'User deleted successfully!');
