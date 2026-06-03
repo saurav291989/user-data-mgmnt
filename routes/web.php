@@ -19,3 +19,7 @@ Route::get('/delete/{id}', [UserController::class, 'delete']);
 Route::get('/edit/{id}', [UserController::class, 'edit']);
 
 Route::post('/update/{id}', [UserController::class, 'update']);
+
+// Route::get('/api/users', [UserController::class, 'getUsers']);
+
+Route::view('/users-api', 'users_api');

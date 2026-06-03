@@ -15,6 +15,7 @@ class UserController extends Controller
                     ->whereNull('deleted_at')
                     ->orderBy('id', 'desc')
                     ->paginate(5);
+
         $totalcount= DB::table('user_data') 
                     ->whereNull('deleted_at')
                     -> count();
@@ -58,4 +59,23 @@ class UserController extends Controller
         return redirect('/users')
                 ->with('success', 'User updated successfully!');
     }
+
+public function getUsers()
+{
+    $users = DB::table('user_data')
+                ->whereNull('deleted_at')
+                ->orderBy('id', 'desc')
+                ->paginate(5);
+
+    $totalcount = DB::table('user_data')
+                    ->whereNull('deleted_at')
+                    ->count();
+
+    return response()->json([
+        'status' => true,
+        'total_records' => $totalcount,
+        'data' => $users
+    ]);
+}
+
 }
