@@ -3,31 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use App\Models\UserData;
-
 
 class UserController extends Controller
 {
+    
     public function dispaly()
     {
-        $users = DB::table('user_data')
-                    ->whereNull('deleted_at')
-                    ->orderBy('id', 'desc')
+
+        $users = UserData::orderBy('id', 'desc')
                     ->paginate(5);
 
-        $totalcount= DB::table('user_data') 
-                    ->whereNull('deleted_at')
-                    -> count();
+        $totalcount = UserData::count();
 
         return view('users', compact('users','totalcount'));
     }
 
+
     public function delete($id)
     {
-        // DB::table('user_data')
-        //     ->where('id', $id)
-        //     ->delete();
+        
         UserData::find($id)->delete();
 
         return redirect('/users')
@@ -36,18 +32,16 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = DB::table('user_data')
-            ->where('id', $id)
-            ->first();
+        
+        $user = UserData :: FindOrFail($id);
 
         return view('edit', compact('user'));
     }
 
     public function update(Request $request,$id)
     {
-        DB::table('user_data')
-            ->where('id', $id)
-            ->update([
+        $user = UserData :: FindOrFail($id);
+        $user -> update([
                 'name' => $request->name,
                 'age' => $request->age,
                 'email' => $request->email,
@@ -62,14 +56,12 @@ class UserController extends Controller
 
 public function getUsers()
 {
-    $users = DB::table('user_data')
-                ->whereNull('deleted_at')
-                ->orderBy('id', 'desc')
-                ->paginate(5);
+    // logger('app route hit');
 
-    $totalcount = DB::table('user_data')
-                    ->whereNull('deleted_at')
-                    ->count();
+    $users = UserData::orderBy('id', 'desc')
+                    ->paginate(5);
+
+    $totalcount = UserData::count();
 
     return response()->json([
         'status' => true,

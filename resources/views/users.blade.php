@@ -19,6 +19,20 @@
 
 <div class="container mt-4">
 
+    @if(session('success'))
+    <div id="success-alert"
+         class="alert alert-success alert-dismissible fade show"
+         role="alert">
+        {{ session('success') }}
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+    </div>
+    @endif
+
     <div class="card shadow-lg border-0 ">
 
         <!-- Header -->
@@ -161,6 +175,16 @@
     </div>
 
 </div>
+
+<script>
+    setTimeout(function () {
+        let alertBox = document.getElementById('success-alert');
+
+        if (alertBox) {
+            alertBox.remove();
+        }
+    }, 3000); // 3000 milliseconds = 3 seconds
+</script>
 
 </body>
 </html>
