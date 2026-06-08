@@ -78,6 +78,8 @@
 
 <body>
 
+@include('layouts.navbar')
+
     <div class="container">
 
         <div class="main-card">
@@ -148,6 +150,13 @@
 
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Department ID</label>
+                        <input type="number"
+                                name="department_id"
+                                class="form-control"
+                                value="{{ $user->department_id }}">
+                    </div>
 
                     <div class="d-flex gap-2">
 
@@ -162,7 +171,7 @@
                         </a>
 
                     </div>
-
+               
                 </form>
 
             </div>
@@ -170,7 +179,7 @@
         </div>
 
     </div>
-
+    @include('layouts.footer')
 </body>
 
 </html>

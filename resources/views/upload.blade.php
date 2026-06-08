@@ -10,6 +10,8 @@
 
 <body class="bg-primary-subtle bg-gradient">
 
+@include('layouts.navbar')
+
     <div class="container vh-100 d-flex justify-content-center align-items-center">
 
         <div class="card shadow-lg p-4 rounded-4"
@@ -68,12 +70,12 @@
                         Upload File
                     </button>
                 </div>
-
+           
             </form>
 
         </div>
 
     </div>
-
+@include('layouts.footer')
 </body>
 </html>

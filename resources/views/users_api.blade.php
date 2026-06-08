@@ -17,6 +17,8 @@
 
 <body class="bg-success-subtle">
 
+@include('layouts.navbar')
+
 <div class="container mt-4">
 
     <div class="card shadow-lg border-0 ">
@@ -64,7 +66,9 @@
                             <th>Email</th>
                             <th>City</th>
                             <th>Gender</th>
+                            <th>Department</th>
                             <th>Action</th>
+                            
 
                          </tr>
 
@@ -103,7 +107,7 @@
     
 function loadPage(page = 1)
 {
-    fetch(`/user-data-mgmnt/public/api/users?page=${page}`)
+    fetch(`/api/users?page=${page}`)
 
     .then(response => response.json())
 
@@ -180,16 +184,20 @@ function loadPage(page = 1)
                 <td>
                     ${genderBadge}
                 </td>
-
+                <td>
+                    <span class="badge bg-primary">
+                        ${user.department?.department_name ?? 'N/A'}
+                    </span>
+                </td>
                 <td>
 
-                    <a href="/user-data-mgmnt/public/edit/${user.id}"
+                    <a href="/edit/${user.id}"
                        target="_blank"
                        class="btn btn-warning btn-sm me-2">
                         Edit
                     </a>
 
-                    <a href="/user-data-mgmnt/public/delete/${user.id}"
+                    <a href="/delete/${user.id}"
                        class="btn btn-danger btn-sm"
                        onclick="return confirm('Are you sure you want to delete this user?')">
                         Delete
@@ -248,8 +256,6 @@ loadPage();
 
 </script>
 
-
-
-
+@include('layouts.footer')
 </body>
 </html>

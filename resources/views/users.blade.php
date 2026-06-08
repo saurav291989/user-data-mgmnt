@@ -17,6 +17,8 @@
 
 <body class="bg-success-subtle">
 
+@include('layouts.navbar')
+
 <div class="container mt-4">
 
     @if(session('success'))
@@ -78,7 +80,9 @@
                             <th>Email</th>
                             <th>City</th>
                             <th>Gender</th>
+                            <th>Department</th>
                             <th>Action</th>
+                            
 
                          </tr>
 
@@ -124,6 +128,11 @@
                                         Female
                                     </span>
                                 @endif
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">
+                                {{ $user->department->department_name ?? 'N/A' }}
+                                </span>
                             </td>
                             <td>
                                 <a href="{{ url('edit/'.$user->id) }}" class="btn btn-warning btn-sm me-2"
@@ -185,6 +194,6 @@
         }
     }, 3000); // 3000 milliseconds = 3 seconds
 </script>
-
+@include('layouts.footer')
 </body>
 </html>

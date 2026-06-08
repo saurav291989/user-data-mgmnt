@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Department;
 
 class UserData extends Model
 {
@@ -16,6 +17,11 @@ class UserData extends Model
         'email',
         'city',
         'age',
-        'gender'
+        'gender',
+        'department_id'
     ];
+    public function department()
+{
+    return $this->belongsTo(Department::class);
+}
 }

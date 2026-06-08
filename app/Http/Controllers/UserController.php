@@ -12,7 +12,8 @@ class UserController extends Controller
     public function dispaly()
     {
 
-        $users = UserData::orderBy('id', 'desc')
+        $users = UserData::with('department')
+                    ->orderBy('id', 'desc')
                     ->paginate(5);
 
         $totalcount = UserData::count();
@@ -40,15 +41,18 @@ class UserController extends Controller
 
     public function update(Request $request,$id)
     {
+        
         $user = UserData :: FindOrFail($id);
         $user -> update([
                 'name' => $request->name,
                 'age' => $request->age,
                 'email' => $request->email,
                 'city' => $request->city,
-                'gender' => $request->gender
+                'gender' => $request->gender,
+                'department_id' => $request->department_id
 
             ]);
+            // dd($user->fresh()->department_id);
 
         return redirect('/users')
                 ->with('success', 'User updated successfully!');
@@ -58,7 +62,8 @@ public function getUsers()
 {
     // logger('app route hit');
 
-    $users = UserData::orderBy('id', 'desc')
+    $users = UserData::with('department')
+                    ->orderBy('id', 'desc')
                     ->paginate(5);
 
     $totalcount = UserData::count();

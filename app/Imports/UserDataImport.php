@@ -16,6 +16,7 @@ class UserDataImport implements ToModel, WithHeadingRow
             'city'   => $row['city'],
             'age'    => $row['age'],
             'gender' => $row['gender'],
+            'department_id' => $row['department_id'],
         ]);
     }
 }
