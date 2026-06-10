@@ -85,7 +85,7 @@
 
             <div class="col-md-5 mb-4">
                 <a href="/upload"
-                class="btn btn-primary w-100 menu-btn" target="_blank">
+                class="btn btn-primary w-100 menu-btn " target="_blank">
                     Upload Data
                 </a>
             </div>
@@ -95,7 +95,18 @@
         <div class="row justify-content-center">
 
             <div class="col-md-5 mb-4">
-                <a href="/users"
+                <a href="{{ route('users.create') }}"
+                class="btn btn-info w-100 menu-btn text-white" target="_blank">
+                    Add User
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-5 mb-4">
+                <a href="{{ route('users.index') }}"
                 class="btn btn-success w-100 menu-btn" target="_blank">
                     View Users
                 </a>

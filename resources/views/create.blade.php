@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <title>Create User</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -85,7 +85,7 @@
         <div class="main-card">
 
             <div class="card-header-custom d-flex justify-content-between align-items-center">
-                <h2>✏️ Edit User</h2>
+                <h2>➕ Add New User</h2>
 
                 <a href="{{ route('users.index') }}"
                    class="btn btn-warning fw-bold">
@@ -94,27 +94,32 @@
             </div>
 
             <div class="card-body-custom">
-
-                <form action="{{ route('users.update', $user->id) }}"
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+                <form action="{{ route('users.store') }}"
                       method="POST">
 
                     @csrf
-                    @method('PUT')
 
                     <div class="mb-3">
                         <label>Name</label>
                         <input type="text"
                                name="name"
                                class="form-control"
-                               value="{{ $user->name }}">
-                    </div>
+                               value="{{ old('name') }}">
 
-                    <div class="mb-3">
-                        <label>Age</label>
-                        <input type="number"
-                               name="age"
-                               class="form-control"
-                               value="{{ $user->age }}">
+                        @error('name')
+                            <div class="text-danger mt-1">
+                               {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -122,7 +127,13 @@
                         <input type="email"
                                name="email"
                                class="form-control"
-                               value="{{ $user->email }}">
+                               value="{{ old('email') }}">
+
+                        @error('email')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -130,7 +141,27 @@
                         <input type="text"
                                name="city"
                                class="form-control"
-                               value="{{ $user->city }}">
+                               value="{{ old('city') }}">
+
+                        @error('city')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Age</label>
+                        <input type="number"
+                               name="age"
+                               class="form-control"
+                               value="{{ old('age') }}">
+
+                        @error('age')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
@@ -139,15 +170,9 @@
                         <select name="gender"
                                 class="form-select">
 
-                            <option value="Male"
-                                {{ $user->gender == 'Male' ? 'selected' : '' }}>
-                                Male
-                            </option>
+                            <option value="Male">Male</option>
 
-                            <option value="Female"
-                                {{ $user->gender == 'Female' ? 'selected' : '' }}>
-                                Female
-                            </option>
+                            <option value="Female">Female</option>
 
                         </select>
                     </div>
@@ -159,11 +184,8 @@
 
                             @foreach($departments as $department)
 
-                                <option value="{{ $department->id }}"
-                                    {{ $user->department_id == $department->id ? 'selected' : '' }}>
-
+                                <option value="{{ $department->id }}">
                                     {{ $department->department_name }}
-
                                 </option>
 
                             @endforeach
@@ -175,7 +197,7 @@
 
                         <button type="submit"
                                 class="btn-update">
-                            Update User
+                            Save User
                         </button>
 
                         <a href="{{ route('users.index') }}"

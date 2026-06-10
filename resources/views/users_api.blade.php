@@ -32,11 +32,20 @@
                     User Management System
                 </h2>
 
-                <!-- Add User Button -->
-                 
-                <a href="{{ route('form') }}" target='_blank' class="btn btn-warning fw-bold">
-                     + Add User
-                </a>
+                <div class="d-flex flex-column gap-2">
+
+                    <a href="{{ route('form') }}"
+                    target="_blank"
+                    class="btn btn-warning fw-bold">
+                        + Import Users
+                    </a>
+
+                    <a href="{{ route('users.create') }}"
+                    class="btn btn-primary fw-bold">
+                        + Add User
+                    </a>
+
+                </div>
 
             </div>
 

@@ -15,7 +15,12 @@
                 Upload
             </a>
 
-            <a class="nav-link" href="/users" target="_blank">
+            <a class="nav-link" href="{{ route('users.create') }}" target="_blank">
+                Add User
+            </a>
+
+
+            <a class="nav-link" href="{{ route('users.index') }}" target="_blank">
                 Users
             </a>
 

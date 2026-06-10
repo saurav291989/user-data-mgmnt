@@ -36,21 +36,30 @@
     @endif
 
     <div class="card shadow-lg border-0 ">
-
+    
         <!-- Header -->
         <div class="card-header bg-secondary text-white px-4 py-3">
 
             <div class="d-flex justify-content-between align-items-center">
 
                 <h2 class="mb-0">
-                    User Management System
+                    User Records
                 </h2>
 
-                <!-- Add User Button -->
-                 
-                <a href="{{ route('form') }}" target='_blank' class="btn btn-warning fw-bold">
-                     + Add User
-                </a>
+                <div class="d-flex flex-column gap-2">
+
+                    <a href="{{ route('form') }}"
+                    target="_blank"
+                    class="btn btn-warning fw-bold text-white">
+                        + Import Users
+                    </a>
+
+                    <a href="{{ route('users.create') }}"
+                    class="btn btn-primary fw-bold">
+                        + Add User
+                    </a>
+
+                </div>
 
             </div>
 
@@ -59,11 +68,34 @@
         <div class="card-body bg-primary-subtle">
 
             <!-- Title -->
-            <div class="text-center mb-1">
+            <!-- <div class="text-center mb-1">
                 <h4 class="text-primary display-10 border-bottom pb-1 d-inline-block">
                     User Records
                 </h4>
-            </div>
+            </div> -->
+
+            <form action="{{ route('users.index') }}" method="GET" class="mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search by name, email or city"
+                            value="{{ request('search') }}">
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            Search
+                        </button>
+
+                        <a href="{{ route('users.index') }}"
+                        class="btn btn-secondary">
+                            Reset
+                        </a>
+                    </div>
+                </div>
+            </form>
 
             <!-- Table -->
             <div class="table-responsive">
@@ -135,15 +167,26 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ url('edit/'.$user->id) }}" class="btn btn-warning btn-sm me-2"
+                                <a href="{{ route('users.edit', $user->id) }}" 
+                                    class="btn btn-warning btn-sm me-2"
                                     target="_blank">
                                     Edit
                                 </a>
 
-                                <a href="{{ url('delete/'.$user->id) }}" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure ? you want to delete this user?')">
-                                    Delete
-                                </a>
+                                <form action="{{ route('users.destroy', $user->id) }}"
+                                        method="POST"
+                                        style="display:inline;">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                        Delete
+                                    </button>
+
+                                </form>
                             </td>
 
                         </tr>
@@ -169,7 +212,7 @@
 
                 <!-- Pagination -->
                 <div>
-                    {{ $users->links('pagination::bootstrap-5') }}
+                    {{ $users->appends(request()->query())->links('pagination::bootstrap-5') }}
                 </div>
 
                 <!-- Total Records -->
